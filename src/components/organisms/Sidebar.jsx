@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import ApperIcon from '@/components/ApperIcon'
 import Button from '@/components/atoms/Button'
 
-const Sidebar = () => {
+const Sidebar = ({ onAddObject }) => {
   const [activeTab, setActiveTab] = useState('tools')
   const [selectedTool, setSelectedTool] = useState('select')
   
@@ -41,7 +41,30 @@ const Sidebar = () => {
   const handleToolSelect = (toolId) => {
     setSelectedTool(toolId)
   }
-  
+
+  const handleAddPrimitive = (primitiveType) => {
+    if (onAddObject) {
+      const newObject = {
+        id: Date.now().toString(),
+        name: primitives.find(p => p.id === primitiveType)?.label || 'Object',
+        type: primitiveType,
+        position: { x: 0, y: 0, z: 0 },
+        rotation: { x: 0, y: 0, z: 0 },
+        scale: { x: 1, y: 1, z: 1 },
+        material: {
+          id: 'default',
+          color: '#808080',
+          metalness: 0.0,
+          roughness: 0.5,
+          opacity: 1.0
+        },
+        visible: true,
+        locked: false,
+        layerId: 'default'
+      }
+      onAddObject(newObject)
+    }
+  }
   return (
     <div className="w-80 bg-surface/90 backdrop-blur-xl border-r border-white/10 flex flex-col">
       {/* Tab Navigation */}
@@ -122,7 +145,7 @@ const Sidebar = () => {
               <h3 className="text-sm font-semibold text-white/80 mb-3 font-display">
                 Add Primitives
               </h3>
-              <div className="grid grid-cols-2 gap-2">
+<div className="grid grid-cols-2 gap-2">
                 {primitives.map((primitive) => (
                   <Button
                     key={primitive.id}
@@ -130,6 +153,7 @@ const Sidebar = () => {
                     size="sm"
                     icon={primitive.icon}
                     className="flex-col h-16 text-xs"
+                    onClick={() => handleAddPrimitive(primitive.id)}
                   >
                     {primitive.label}
                   </Button>

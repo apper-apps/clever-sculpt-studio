@@ -7,13 +7,15 @@ const DesignStudio = () => {
   const [objects, setObjects] = useState([])
   const [selectedObject, setSelectedObject] = useState(null)
   const [viewMode, setViewMode] = useState('perspective')
-  
-  // Add new object to scene
+// Add new object to scene
   const handleAddObject = useCallback((newObject) => {
-    setObjects(prev => [...prev, newObject])
-    setSelectedObject(newObject)
-  }, [])
-  
+    const objectWithId = {
+      ...newObject,
+      id: objects.length > 0 ? Math.max(...objects.map(obj => parseInt(obj.id))) + 1 : 1
+    }
+    setObjects(prev => [...prev, objectWithId])
+    setSelectedObject(objectWithId)
+  }, [objects])
   // Update existing object
   const handleUpdateObject = useCallback((objectId, updatedObject) => {
     setObjects(prev => 
@@ -51,11 +53,11 @@ const DesignStudio = () => {
         setSelectedObject(null)
         break
       case 'd':
-        if (e.ctrlKey && selectedObject) {
+if (e.ctrlKey && selectedObject) {
           e.preventDefault()
           const duplicatedObject = {
             ...selectedObject,
-            id: Date.now().toString(),
+            id: (objects.length > 0 ? Math.max(...objects.map(obj => parseInt(obj.id))) + 1 : 1).toString(),
             name: `${selectedObject.name} Copy`,
             position: {
               x: selectedObject.position.x + 2,

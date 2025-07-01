@@ -1,12 +1,11 @@
 import { Suspense, useRef, useEffect, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Grid, Box, Sphere, Cylinder } from '@react-three/drei'
+import { OrbitControls, Grid, Box, Sphere, Cylinder, Plane, Cone, Torus } from '@react-three/drei'
 import { toast } from 'react-toastify'
 import * as THREE from 'three'
 import Loading from '@/components/ui/Loading'
 import Error from '@/components/ui/Error'
 import Empty from '@/components/ui/Empty'
-
 // Scene Objects Component
 const SceneObjects = ({ objects, selectedObject, onSelectObject }) => {
   return (
@@ -47,8 +46,7 @@ const SceneObjects = ({ objects, selectedObject, onSelectObject }) => {
               opacity={obj.material.opacity}
             />
           )
-          
-          switch (obj.type) {
+switch (obj.type) {
             case 'cube':
               return (
                 <Box {...commonProps}>
@@ -84,6 +82,42 @@ const SceneObjects = ({ objects, selectedObject, onSelectObject }) => {
                     </lineSegments>
                   )}
                 </Cylinder>
+              )
+            case 'plane':
+              return (
+                <Plane {...commonProps}>
+                  {material}
+                  {isSelected && (
+                    <lineSegments>
+                      <edgesGeometry args={[new THREE.PlaneGeometry(2, 2)]} />
+                      <lineBasicMaterial color="#00D4FF" />
+                    </lineSegments>
+                  )}
+                </Plane>
+              )
+            case 'cone':
+              return (
+                <Cone {...commonProps}>
+                  {material}
+                  {isSelected && (
+                    <lineSegments>
+                      <edgesGeometry args={[new THREE.ConeGeometry(1, 2, 32)]} />
+                      <lineBasicMaterial color="#00D4FF" />
+                    </lineSegments>
+                  )}
+                </Cone>
+              )
+            case 'torus':
+              return (
+                <Torus {...commonProps}>
+                  {material}
+                  {isSelected && (
+                    <lineSegments>
+                      <edgesGeometry args={[new THREE.TorusGeometry(1, 0.3, 16, 100)]} />
+                      <lineBasicMaterial color="#00D4FF" />
+                    </lineSegments>
+                  )}
+                </Torus>
               )
             default:
               return null
@@ -161,15 +195,25 @@ const Viewport3D = ({
       onSelectObject(null)
     }
   }
-  
-  const handleAddFirstObject = () => {
-    const newObject = {
-      id: Date.now().toString(),
-      name: 'Cube',
-      type: 'cube',
+const createPrimitiveObject = (type) => {
+    const shapeDefaults = {
+      cube: { name: 'Cube', scale: { x: 1, y: 1, z: 1 } },
+      sphere: { name: 'Sphere', scale: { x: 1, y: 1, z: 1 } },
+      cylinder: { name: 'Cylinder', scale: { x: 1, y: 1, z: 1 } },
+      plane: { name: 'Plane', scale: { x: 2, y: 2, z: 1 } },
+      cone: { name: 'Cone', scale: { x: 1, y: 1, z: 1 } },
+      torus: { name: 'Torus', scale: { x: 1, y: 1, z: 1 } }
+    }
+    
+    const defaults = shapeDefaults[type] || shapeDefaults.cube
+    
+    return {
+      id: (objects.length + 1).toString(),
+      name: defaults.name,
+      type: type,
       position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0 },
-      scale: { x: 1, y: 1, z: 1 },
+      scale: defaults.scale,
       material: {
         id: 'default',
         color: '#808080',
@@ -181,6 +225,10 @@ const Viewport3D = ({
       locked: false,
       layerId: 'default'
     }
+  }
+
+  const handleAddFirstObject = () => {
+    const newObject = createPrimitiveObject('cube')
     
     if (onAddObject) {
       onAddObject(newObject)
