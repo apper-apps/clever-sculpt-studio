@@ -1,0 +1,28 @@
+[
+  {
+    "Id": 1,
+    "name": "Sample Cube",
+    "type": "cube",
+    "position": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "scale": { "x": 1, "y": 1, "z": 1 },
+    "materialId": 1,
+    "visible": true,
+    "locked": false,
+    "layerId": "default",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 2,
+    "name": "Sample Sphere",
+    "type": "sphere",
+    "position": { "x": 3, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "scale": { "x": 1, "y": 1, "z": 1 },
+    "materialId": 2,
+    "visible": true,
+    "locked": false,
+    "layerId": "default",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

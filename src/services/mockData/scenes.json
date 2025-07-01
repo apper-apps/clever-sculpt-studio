@@ -1,0 +1,33 @@
+[
+  {
+    "Id": 1,
+    "name": "Default Scene",
+    "objects": [],
+    "lights": [
+      {
+        "Id": 1,
+        "type": "directional",
+        "position": { "x": 10, "y": 10, "z": 5 },
+        "intensity": 1.0,
+        "color": "#ffffff",
+        "castShadow": true
+      },
+      {
+        "Id": 2,
+        "type": "ambient",
+        "intensity": 0.4,
+        "color": "#ffffff"
+      }
+    ],
+    "camera": {
+      "position": { "x": 5, "y": 5, "z": 5 },
+      "target": { "x": 0, "y": 0, "z": 0 },
+      "fov": 75,
+      "near": 0.1,
+      "far": 1000
+    },
+    "background": "#0F0F1E",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "name": "Default",
+    "color": "#808080",
+    "metalness": 0.0,
+    "roughness": 0.5,
+    "opacity": 1.0,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 2,
+    "name": "Metal",
+    "color": "#B8B8B8",
+    "metalness": 1.0,
+    "roughness": 0.1,
+    "opacity": 1.0,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 3,
+    "name": "Plastic",
+    "color": "#FF6B6B",
+    "metalness": 0.0,
+    "roughness": 0.8,
+    "opacity": 1.0,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 4,
+    "name": "Glass",
+    "color": "#4ECDC4",
+    "metalness": 0.0,
+    "roughness": 0.0,
+    "opacity": 0.3,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 5,
+    "name": "Wood",
+    "color": "#8B4513",
+    "metalness": 0.0,
+    "roughness": 0.9,
+    "opacity": 1.0,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "Id": 6,
+    "name": "Rubber",
+    "color": "#2C3E50",
+    "metalness": 0.0,
+    "roughness": 1.0,
+    "opacity": 1.0,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]
